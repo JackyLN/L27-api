@@ -1,0 +1,19 @@
+{
+  "name": "l27-api",
+  "version": "1.0.0",
+  "description": "L27 api",
+  "main": "server.js",
+  "repository": "git@github.com:JackyLN/L27-api.git",
+  "author": "Jacky Le <lenghia1991@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.0",
+    "express": "^4.17.2",
+    "mongoose": "^6.2.1",
+    "path": "^0.12.7"
+  },
+  "scripts": {
+    "server": "node src/server.js"
+  }
+}
