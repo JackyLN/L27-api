@@ -1,0 +1,42 @@
+[
+  {
+    "title": "Mr",
+    "first": "Le",
+    "last": "Nghia",
+    "email": "lenghia1991@gmail.com",
+    "birthday": "06/11/1991",
+    "interestedin": "menwear",
+    "shoppingsection": "business",
+    "contact_upcoming_event": "on"
+  },
+  {
+    "title": "Mrs",
+    "first": "Hanna",
+    "last": "Tan",
+    "email": "hanna.tan@gmail.com",
+    "birthday": "31/03/1997",
+    "interestedin": "womenwear",
+    "shoppingsection": "business",
+    "contact_newsletter": "on",
+    "contact_upcoming_event": "on"
+  },
+  {
+    "title": "Mrs",
+    "first": "Test",
+    "last": "1",
+    "email": "abc.com",
+    "birthday": "01/01/1001",
+    "interestedin": "menwear",
+    "shoppingsection": "business"
+  },
+  {
+    "first": "Test",
+    "last": "as",
+    "email": "1231a@as",
+    "birthday": "2022-02-01",
+    "interestedin": "option2",
+    "shoppingsection": "Business",
+    "contact_upcoming_event": "on",
+    "contact_exclusive_deals": "on"
+  }
+]
