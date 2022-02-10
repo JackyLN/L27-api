@@ -2,10 +2,12 @@ const express = require('express');
 
 
 const app = express();
-const cors = require('cors');
+const cors = require('cors')({origin: true});
 const config = require('./config');
 const port = config.server.APPLICATION_PORT;
 const bodyParser = require('body-parser')
+
+
 
 app.use(cors());
 app.use(express.urlencoded({
