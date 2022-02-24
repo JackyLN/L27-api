@@ -33,16 +33,6 @@ router.get('/', async (req, res) => {
 
 router.post('/', async (req, res) => {
   try {
-    // let input = {
-    //   title: "Mrs",
-    //   first: "Les",
-    //   last: "Nghias",
-    //   email: "lenghsia1991@gmail.com",
-    //   birthday: "06a/11/1991",
-    //   interestedin: "menwear",
-    //   shoppingsection: "business",
-    //   contactpreference: ["newsletter"]
-    // }
     let { body } = req;
     let input = {
       title: body.title,

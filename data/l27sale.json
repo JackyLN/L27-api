@@ -1,0 +1,110 @@
+[
+  {
+    "Name": "Asymmetric midi dress",
+    "Material": "50% recycled polyester",
+    "Size": ["XS", "S", "M", "L"],
+    "Color": ["Black"],
+    "Description": "Product description: Dress with a V-neckline and thin straps. Slit detail at the waist and at the hem. Invisible side zip fastening. \n Availability: In stock, Out of stock, Pre-order, Back-order",
+    "Availability": "Out of stock",
+    "Price": [
+      {"Amount": 6990, "Currency": "JPY"}
+    ],
+    "image": []
+  },
+  {
+    "Name": "Geometric print dress",
+    "Material": "polyester, viscose",
+    "Size": ["XS", "S", "M", "L"],
+    "Color": ["Multicolored"],
+    "Description": "High neck mini dress with short sleeves. Buttoned opening at the back.",
+    "Availability": "In stock",
+    "Price": [
+      {"Amount": 5990, "Currency": "JPY"}
+    ],
+    "image": []
+  },
+  {
+    "Name": "Knit high neck dress",
+    "Material": "ribbed knit",
+    "Size": ["XS", "S", "M", "L"],
+    "Color": ["Black"],
+    "Description": "Midi dress with a high neck and long sleeves. Flared hem.",
+    "Availability": "Out of stock",
+    "Price": [
+      {"Amount": 5990, "Currency": "JPY"}
+    ],
+    "image": []
+  },
+  {
+    "Name": "Shirt dress with gathering",
+    "Material": "30% polyester, 70% cotton",
+    "Size": ["XS", "S", "M", "L"],
+    "Color": ["Light khaki"],
+    "Description": "Collared midi dress with long sleeves falling below the elbow. Gathered detail on the front. Golden front button fastening.",
+    "Availability": "Pre-order",
+    "Price": [
+      {"Amount": 7590, "Currency": "JPY"}
+    ],
+    "image": []
+  },
+  {
+    "Name": "Pleated poplin dress",
+    "Material": "100% cotton",
+    "Size": ["XS", "S", "M", "L"],
+    "Color": ["Black"],
+    "Description": "Midi dress with a ruffle collar and bow. V-neck and long sleeves. Elastic waist and pleated hem.",
+    "Availability": "Pre-order",
+    "Price": [
+      {"Amount": 7590, "Currency": "JPY"}
+    ],
+    "image": []
+  },
+  {
+    "Name": "Midi dress with buttons",
+    "Material": "knit",
+    "Size": ["XS", "S", "M", "L"],
+    "Color": ["Black"],
+    "Description": "Sleeveless round neck midi dress. Golden textured button detail on the shoulder. Invisible back zip fastening.",
+    "Availability": "Back-order",
+    "Price": [
+      {"Amount": 4990, "Currency": "JPY"}
+    ],
+    "image": []
+  },
+  {
+    "Name": "Draped blazer dress",
+    "Material": "polyester",
+    "Size": ["XS", "S", "M", "L"],
+    "Color": ["Red"],
+    "Description": "V-neck blazer dress with long sleeves and shoulder pads. Side flap pockets. Pleated detail on the front. Asymmetric hem. Double-breasted front with concealed snap button fastening.",
+    "Availability": "In stock",
+    "Price": [
+      {"Amount": 12990, "Currency": "JPY"}
+    ],
+    "image": []
+  },
+  {
+    "Name": "Voluminous poplin dress",
+    "Material": "100% poplin cotton",
+    "Size": ["XS", "S", "M", "L"],
+    "Color": ["White"],
+    "Description": "Collared mini dress with long sleeves. Lace-trimmed detail on the front. Ruffled hem. Fastens at the front with pearl bead buttons.",
+    "Availability": "Out of stock",
+    "Price": [
+      {"Amount": 5990, "Currency": "JPY"}
+    ],
+    "image": []
+  },
+  {
+    "Name": "Poplin cut-out dress",
+    "Material": "100% poplin cotton",
+    "Size": ["XS", "S", "M", "L"],
+    "Color": ["Lilac"],
+    "Description": "V-neck midi dress with short puff sleeves. Cut-out detail at the waist. Contrast floral embroidery.",
+    "Availability": "In stock",
+    "Price": [
+      {"Amount": 7590, "Currency": "JPY"}
+    ],
+    "image": []
+  }
+]

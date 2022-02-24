@@ -28,6 +28,9 @@ const SalesServices = require('./api/SalesServices');
 app.use(cors());
 app.use('/api/sale', SalesServices); //Use cors on single route, use //app.use(cors()); to enable every request
 
+const ShopServices = require('./api/ShopServices');
+app.use('/api/shop', ShopServices);
+
 
 const server = app.listen(port, () => console.log(`API running on PORT ${port}!`));
 
