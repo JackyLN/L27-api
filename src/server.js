@@ -9,13 +9,17 @@ const bodyParser = require('body-parser')
 
 //MongoDB
 var mongoose = require('mongoose');
-mongoose.connect(config.server.APPLICATION_MONGOOSE, {
-  useNewUrlParser: true,
+// mongoose.connect(config.server.APPLICATION_MONGOOSE, {
+//   useNewUrlParser: true,
+//   useUnifiedTopology: true
+// }).catch(error => console.log(error));
+// var db = mongoose.connection;
+// db.once('open', () => console.log('connected to database'));
+// db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+
+app.mongoConnection = mongoose.createConnection(config.server.APPLICATION_MONGOOSE, {
   useUnifiedTopology: true
-}).catch(error => console.log(error));
-var db = mongoose.connection;
-db.once('open', () => console.log('connected to database'));
-db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+});
 
 app.use(cors());
 app.use(express.urlencoded({
