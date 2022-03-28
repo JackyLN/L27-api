@@ -9,7 +9,7 @@
     "price": [
       {"amount": 6990, "currency": "JPY"}
     ],
-    "image": []
+    "image": ["asymmetric_midi_dress.png"]
   },
   {
     "name": "Geometric print dress",
@@ -21,7 +21,7 @@
     "price": [
       {"amount": 5990, "currency": "JPY"}
     ],
-    "image": []
+    "image": ["geometric_print_dress.png"]
   },
   {
     "name": "Knit high neck dress",
@@ -33,7 +33,7 @@
     "price": [
       {"amount": 5990, "currency": "JPY"}
     ],
-    "image": []
+    "image": ["knit_high_neck_dress.png"]
   },
   {
     "name": "Shirt dress with gathering",
@@ -69,7 +69,7 @@
     "price": [
       {"amount": 4990, "currency": "JPY"}
     ],
-    "image": []
+    "image": ["midi_dress_with_buttons.png"]
   },
   {
     "name": "Draped blazer dress",
@@ -81,7 +81,7 @@
     "price": [
       {"amount": 12990, "currency": "JPY"}
     ],
-    "image": []
+    "image": ["draped_blazer_dress.png"]
   },
   {
     "name": "Voluminous poplin dress",
@@ -93,7 +93,7 @@
     "price": [
       {"amount": 5990, "currency": "JPY"}
     ],
-    "image": []
+    "image": ["voluminous_poplin_dress.png"]
   },
   {
     "name": "Poplin cut-out dress",
@@ -105,6 +105,6 @@
     "price": [
       {"amount": 7590, "currency": "JPY"}
     ],
-    "image": []
+    "image": ["poplin_cut_out_dress.png"]
   }
 ]
