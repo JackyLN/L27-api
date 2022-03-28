@@ -22,6 +22,8 @@ const ProductSchema = new Schema({
 
       delete ret._id;
       delete ret.__v;
+
+      ret.image = ret.image.map(i => new URL(i, config.server.IMAGE_SERVER));
     }
   }
 });
