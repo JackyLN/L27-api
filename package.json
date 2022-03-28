@@ -7,6 +7,7 @@
   "author": "Jacky Le <lenghia1991@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "assert-plus": "^1.0.0",
     "body-parser": "^1.19.1",
     "chai": "^4.3.6",
     "cors": "^2.8.5",
