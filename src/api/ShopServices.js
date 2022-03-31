@@ -48,5 +48,25 @@ router.get('/', async (req, res) => {
   }
 });
 
+router.post('/', async (req, res) => {
+  try {
+    const productDAO = new ProductDAO(req.app.mongoConnection);
+    const productData = {
+      name: req.body.name,
+      material: req.body.material,
+      size: req.body.size,
+      color: req.body.color,
+      description: req.body.description,
+      availability: req.body.availability,
+      price: req.body.price,
+      image: req.body.image
+    }
+    const product = await productDAO.createProduct(productData);
+    res.status(200).json(product);
+  } catch (ex) {
+    console.log(ex);
+  }
+});
+
 
 module.exports = router;

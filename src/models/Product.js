@@ -2,14 +2,17 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const config = require('../config');
 
+const imageServer = config.server.IMAGE_SERVER;
+const defaultCurrency =  config.product.DEFAULT_CURRENCY;
+
 const ProductSchema = new Schema({
   name: { type: String, required: true },
   material: { type: String, required: true },
   size: { type: [String] },
   color: { type: [String] },
-  description: { type: [String] },
+  description: { type: String },
   availability: { type: [String] },
-  price: { type: Schema.Types.Mixed, required: true },
+  price: { type: [Schema.Types.Mixed], required: true },
   image: { type: [String] }
 }, {
   timestamps: {
@@ -23,13 +26,13 @@ const ProductSchema = new Schema({
       delete ret._id;
       delete ret.__v;
 
-      ret.image = ret.image.map(i => new URL(i, config.server.IMAGE_SERVER));
+      ret.image = ret.image.map(i => new URL(i, imageServer).toString());
     }
   }
 });
 ProductSchema.price = {
   amount: { type: Number, required: true },
-  currency: { type: String, default: config.product.DEFAULT_CURRENCY }
+  currency: { type: String, default: defaultCurrency, required: true }
 }
 
 module.exports = ProductSchema;

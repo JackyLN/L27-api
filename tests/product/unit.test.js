@@ -3,6 +3,8 @@ const mongoose = require('mongoose');
 const { MongoMemoryServer } = require('mongodb-memory-server');
 const fs = require('fs');
 
+const config = require('../../src/config');
+
 const ProductDAO = require("../../src/data_access/ProductDAO");
 
 describe('Product DAO unit test', () => {
@@ -71,8 +73,80 @@ describe('Product DAO unit test', () => {
 
     it('should get all product in database without params', async () => {
       const result = await productDAO.getProducts(params, options);
-      
+
       expect(parseInt(result.count)).to.be.equal(dummyData.length);
+      expect(result.data.length).to.be.greaterThan(1);
+    });
+
+    it('should return pagination', async () => {
+      let totalLength = dummyData.length;
+      let totalPage2Items = totalLength / 2;
+      if (totalLength / 2 != 0) totalPage2Items++;
+
+      options.limit = 2;
+      let count = 0;
+      let checkContinue = true;
+
+      while (checkContinue) {
+        const result = await productDAO.getProducts(params, options);
+        options.page++;
+
+        if (result.data.length != 0) {
+          count = count + result.data.length;
+        } else {
+          checkContinue = false;
+        }
+      }
+      expect(count).to.be.equal(dummyData.length);
+    });
+
+    it('should search by name', async () => {
+      params.name = "poplin";
+      const result = await productDAO.getProducts(params, options);
+
+      expect(result.count).to.be.greaterThan(0);
+      expect(result.data.length).to.be.greaterThan(0);
+      expect(dummyData.length).to.be.greaterThan(result.count);
+    });
+  });
+
+  describe('createProduct', () => {
+    it('should create a new product', async () => {
+      try {
+        const data = {
+          name: "Test new Product",
+          material: "Silk",
+          size: ["L", "M"],
+          color: ["black", "red"],
+          description: "Test description",
+          availability: ["Available"],
+          price: [{ amount: 1000, currency: config.product.DEFAULT_CURRENCY }],
+          image: ["test_img.png"]
+        }
+
+        const result = await productDAO.createProduct(data);
+
+        const params = { "name": "Test new Product" };
+        const options = {
+          page: 0,
+          limit: 5
+        };
+        const searchNew = await productDAO.getProducts(params, options);
+
+        expect(result).to.be.an('object');
+        expect(result).to.have.property('name');
+        expect(result).to.have.property('material');
+        expect(result).to.have.property('size');
+        expect(result).to.have.property('color');
+        expect(result).to.have.property('price');
+        expect(result.price[0]).to.have.property('currency');
+        expect(result.price[0].amount).to.be.equal(1000);
+
+        expect(searchNew.count).to.be.equal(1);
+      }
+      catch (ex) {
+        expect(ex).to.equal(null);
+      }
     });
   });
 });

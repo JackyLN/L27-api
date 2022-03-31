@@ -8,7 +8,7 @@ const filename = 'data/l27sale.json';
 class ProductDAO {
   constructor(mongoConnection) {
     this.models = {
-      Product: mongoConnection.model('Product', ProductSchema) 
+      Product: mongoConnection.model('Product', ProductSchema)
     };
   }
 
@@ -39,31 +39,50 @@ class ProductDAO {
     assert.number(option.limit);
 
     try {
-  
+
       let query = this.models.Product.find({});
       let count_query = this.models.Product.count();
       let products = [], total = 0;
-  
+
       if (params.name) {
-        query = query.where({name: {$regex: params.name, $options: 'i'}});
-        count_query = count_query.where({name: {$regex: params.name, $options: 'i'}});
+        query = query.where({ name: { $regex: params.name, $options: 'i' } });
+        count_query = count_query.where({ name: { $regex: params.name, $options: 'i' } });
       }
 
       query = query.skip(option.page * option.limit)
         .limit(option.limit);
-      
+
       // if (id) {
       //   query = query.where('id').equals(id);
       //   count_query = count_query.where('id').equals(id);
       // }
-  
+
       total = await count_query.exec();
       products = await query.exec();
-  
+
       return {
         count: total,
         data: products ? products.map(product => product.toJSON()) : []
       };
+    } catch (ex) {
+      console.log(ex);
+    }
+  }
+
+  async createProduct(productData) {
+    try {
+      assert.string(productData.name);
+      assert.string(productData.material);
+      assert.optionalArrayOfString(productData.size);
+      assert.optionalArrayOfString(productData.color);
+      assert.optionalString(productData.description);
+      assert.optionalArrayOfString(productData.availability);
+      assert.arrayOfObject(productData.price);
+      assert.optionalArrayOfString(productData.image);
+
+      const createUser = await this.models.Product.create(productData);
+
+      return createUser.toJSON();
     } catch (ex) {
       console.log(ex);
     }
