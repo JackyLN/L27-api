@@ -149,4 +149,41 @@ describe('Product DAO unit test', () => {
       }
     });
   });
+
+  describe('updateProduct', () => {
+    it('should update a product', async () => {
+      const dataUpdate = {
+        description: "New description",
+        color: ["white"]
+      }
+
+      const searchProduct = await productDAO.getProducts({ "name": "Test new Product" }, { page: 0, limit: 1 });
+      const updateProductId = searchProduct.data[0].id;
+
+      const updatedProduct = await productDAO.updateProduct(updateProductId, dataUpdate);
+
+      const newSearchProduct = await productDAO.getProducts({ "name": "Test new Product" }, { page: 0, limit: 1 });
+
+      expect(updatedProduct).to.be.an('object');
+      expect(updatedProduct.id).to.be.equal(newSearchProduct.data[0].id);
+      expect(updatedProduct.name).to.be.equal(newSearchProduct.data[0].name);
+      expect(newSearchProduct.data[0].description).to.be.equal(dataUpdate.description);
+      expect(newSearchProduct.data[0].color[0]).to.be.equal(dataUpdate.color[0]);
+    });
+  });
+
+  describe('deleteProduct', () => {
+    it('should delete a product', async () => {
+
+      const searchProduct = await productDAO.getProducts({ "name": "Test new Product" }, { page: 0, limit: 1 });
+      const productId = searchProduct.data[0].id;
+
+      const isDeleted = await productDAO.deleteProduct(productId);
+      
+      const secondDelete = await productDAO.deleteProduct(productId);
+
+      expect(isDeleted).to.be.equal(true);
+      expect(secondDelete).to.be.equal(false);
+    })
+  })
 });
