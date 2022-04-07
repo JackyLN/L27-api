@@ -87,6 +87,38 @@ class ProductDAO {
       console.log(ex);
     }
   }
+
+  async updateProduct(productId, productData) {
+    try {
+      assert.string(productId);
+      assert.object(productData);
+      assert.optionalString(productData.name);
+      assert.optionalString(productData.material);
+      assert.optionalArrayOfString(productData.size);
+      assert.optionalArrayOfString(productData.color);
+      assert.optionalString(productData.description);
+      assert.optionalArrayOfString(productData.availability);
+      assert.optionalArrayOfObject(productData.price);
+      assert.optionalArrayOfString(productData.image);
+
+      const updatedUser = await this.models.Product.findByIdAndUpdate(productId, productData, { new: true });
+      if (!updatedUser) {
+        throw new Error('Product Not Found');
+      }
+
+      return updatedUser.toJSON();
+
+    } catch (ex) {
+      console.log(ex);
+    }
+  }
+
+  async deleteProduct(productId) {
+    assert.string(productId);
+    const isDeleted = await this.models.Product.findByIdAndDelete(productId);
+
+    return isDeleted ? true : false; //TODO
+  }
 }
 
 module.exports = ProductDAO;

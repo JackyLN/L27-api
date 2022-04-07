@@ -68,5 +68,33 @@ router.post('/', async (req, res) => {
   }
 });
 
+router.patch('/:product_id', async (req, res) => {
+  try {
+    const productDAO = new ProductDAO(req.app.mongoConnection);
+
+    const { product_id: productID } = req.params;
+    const productData = {
+      ...req.body
+    };
+    const updatedProduct = await productDAO.updateProduct(productID, productData);
+    res.status(200).json(updatedProduct);
+  } catch (ex) {
+    console.log(ex);
+  }
+});
+
+router.delete('/:product_id', async (req, res) => {
+  try {
+
+    const { product_id: productID } = req.params;
+
+    const productDAO = new ProductDAO(req.app.mongoConnection);
+    const isDeleted = await productDAO.deleteProduct(productID);
+    res.status(200).json(isDeleted);
+  } catch (ex) {
+    console.log(ex);
+  }
+})
+
 
 module.exports = router;
