@@ -11,7 +11,7 @@ const ProductSchema = new Schema({
   size: { type: [String] },
   color: { type: [String] },
   description: { type: String },
-  availability: { type: [String] },
+  availability: { type: String },
   price: { type: [Schema.Types.Mixed], required: true },
   image: { type: [String] }
 }, {
