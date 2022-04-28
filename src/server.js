@@ -35,12 +35,15 @@ app.get('/', (req, res) => {
 
 //API routing
 //Sale routing
-const SalesServices = require('./api/SalesServices');
+const SalesController = require('./controller/SalesController');
 app.use(cors());
-app.use('/sale', SalesServices); //Use cors on single route, use //app.use(cors()); to enable every request
+app.use('/sale', SalesController); //Use cors on single route, use //app.use(cors()); to enable every request
 
-const ShopServices = require('./api/ShopServices');
-app.use('/shop', ShopServices);
+const ShopController = require('./controller/ShopController');
+app.use('/shop', ShopController);
+
+const AuthController = require('./controller/AuthController');
+app.use('/login', AuthController);
 
 
 const server = app.listen(port, () => console.log(`API running on PORT ${port}!`));

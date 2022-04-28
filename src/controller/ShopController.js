@@ -4,7 +4,7 @@ const fs = require('fs')
 const { validate, ValidationError, Joi } = require('express-validation')
 const Product = require('../models/Product');
 
-const ProductDAO = require('../data_access/ProductDAO');
+const ProductService = require('../services/ProductService');
 // router.use((req, res, next) => {
 //   const productDAO = new ProductDAO(req.app.mongoConnection);
 //   req.productDAO = productDAO;
@@ -14,8 +14,8 @@ const ProductDAO = require('../data_access/ProductDAO');
 //RESET & pre import db
 router.post('/reset', async (req, res) => {
   try {
-    const productDAO = new ProductDAO(req.app.mongoConnection);
-    const dummyData = await productDAO.resetDummyProducts();
+    const productService = new ProductService(req.app.mongoConnection);
+    const dummyData = await productService.resetDummyProducts();
 
     res.status(200).json(dummyData);
   } catch (ex) {
@@ -25,22 +25,22 @@ router.post('/reset', async (req, res) => {
 });
 
 router.get('/all', async (req, res) => {
-  const productDAO = new ProductDAO(req.app.mongoConnection);
-  let data = await productDAO.getAllProducts();
+  const productService = new ProductService(req.app.mongoConnection);
+  let data = await productService.getAllProducts();
   res.status(200).json(data);
 });
 
 router.get('/', async (req, res) => {
 
   try {
-    const productDAO = new ProductDAO(req.app.mongoConnection);
+    const productService = new ProductService(req.app.mongoConnection);
     const params = { name: req.query.name };
     const option = {
       page: parseInt(req.query.page, 10) || 0,
       limit: parseInt(req.query.limit, 10) || 5
     };
 
-    let data = await productDAO.getProducts(params, option);
+    let data = await productService.getProducts(params, option);
     res.status(200).json(data);
   } catch (ex) {
     //TODO Handle error
@@ -50,7 +50,7 @@ router.get('/', async (req, res) => {
 
 router.post('/', async (req, res) => {
   try {
-    const productDAO = new ProductDAO(req.app.mongoConnection);
+    const productService = new ProductService(req.app.mongoConnection);
     const productData = {
       name: req.body.name,
       material: req.body.material,
@@ -61,7 +61,7 @@ router.post('/', async (req, res) => {
       price: req.body.price,
       image: req.body.image
     }
-    const product = await productDAO.createProduct(productData);
+    const product = await productService.createProduct(productData);
     res.status(200).json(product);
   } catch (ex) {
     console.log(ex);
@@ -70,13 +70,13 @@ router.post('/', async (req, res) => {
 
 router.patch('/:product_id', async (req, res) => {
   try {
-    const productDAO = new ProductDAO(req.app.mongoConnection);
+    const productService = new ProductService(req.app.mongoConnection);
 
     const { product_id: productID } = req.params;
     const productData = {
       ...req.body
     };
-    const updatedProduct = await productDAO.updateProduct(productID, productData);
+    const updatedProduct = await productService.updateProduct(productID, productData);
     res.status(200).json(updatedProduct);
   } catch (ex) {
     console.log(ex);
@@ -88,8 +88,8 @@ router.delete('/:product_id', async (req, res) => {
 
     const { product_id: productID } = req.params;
 
-    const productDAO = new ProductDAO(req.app.mongoConnection);
-    const isDeleted = await productDAO.deleteProduct(productID);
+    const productService = new ProductService(req.app.mongoConnection);
+    const isDeleted = await productService.deleteProduct(productID);
     res.status(200).json(isDeleted);
   } catch (ex) {
     console.log(ex);

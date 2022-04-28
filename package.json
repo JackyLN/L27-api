@@ -8,6 +8,7 @@
   "license": "MIT",
   "dependencies": {
     "assert-plus": "^1.0.0",
+    "bcrypt": "^5.0.1",
     "body-parser": "^1.19.1",
     "chai": "^4.3.6",
     "cors": "^2.8.5",
@@ -15,6 +16,7 @@
     "express": "^4.17.2",
     "express-validation": "^3.0.8",
     "fs": "^0.0.1-security",
+    "jsonwebtoken": "^8.5.1",
     "mocha": "^9.2.2",
     "mongoose": "^6.2.7",
     "path": "^0.12.7"

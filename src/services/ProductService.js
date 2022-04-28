@@ -5,7 +5,7 @@ const ProductSchema = require('../models/Product');
 
 const filename = 'data/l27sale.json';
 
-class ProductDAO {
+class ProductService {
   constructor(mongoConnection) {
     this.models = {
       Product: mongoConnection.model('Product', ProductSchema)
@@ -76,7 +76,7 @@ class ProductDAO {
       assert.optionalArrayOfString(productData.size);
       assert.optionalArrayOfString(productData.color);
       assert.optionalString(productData.description);
-      assert.optionalArrayOfString(productData.availability);
+      assert.optionalString(productData.availability);
       assert.arrayOfObject(productData.price);
       assert.optionalArrayOfString(productData.image);
 
@@ -121,4 +121,4 @@ class ProductDAO {
   }
 }
 
-module.exports = ProductDAO;
+module.exports = ProductService;

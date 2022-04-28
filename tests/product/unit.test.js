@@ -5,14 +5,14 @@ const fs = require('fs');
 
 const config = require('../../src/config');
 
-const ProductDAO = require("../../src/data_access/ProductDAO");
+const ProductService = require("../../src/services/ProductService");
 
-describe('Product DAO unit test', () => {
+describe('Product Service unit test', () => {
 
   //1647963839726
 
   let mongoServer;
-  let productDAO, dummyData, params, options;
+  let productService, dummyData, params, options;
   const opts = {
     useUnifiedTopology: true
   }
@@ -20,7 +20,7 @@ describe('Product DAO unit test', () => {
   before(async () => {
     mongoServer = await MongoMemoryServer.create();
     await mongoose.connect(mongoServer.getUri());
-    productDAO = new ProductDAO(mongoose);
+    productService = new ProductService(mongoose);
     // mongoServer.create()
     //   .getConnectionString()
     //   .then(mongoUri => {
@@ -44,7 +44,7 @@ describe('Product DAO unit test', () => {
         //dump data inside
         const data = JSON.parse(fs.readFileSync(filename, 'utf8'));
 
-        dummyData = await productDAO.resetDummyProducts();
+        dummyData = await productService.resetDummyProducts();
 
         expect(dummyData).to.be.an('array');
         expect(dummyData.length).to.be.equal(data.length);
@@ -56,7 +56,7 @@ describe('Product DAO unit test', () => {
 
   describe('getAllProducts', () => {
     it('should get all product in database', async () => {
-      const result = await productDAO.getAllProducts();
+      const result = await productService.getAllProducts();
 
       expect(result.length).to.be.equal(dummyData.length);
     });
@@ -72,7 +72,7 @@ describe('Product DAO unit test', () => {
     });
 
     it('should get all product in database without params', async () => {
-      const result = await productDAO.getProducts(params, options);
+      const result = await productService.getProducts(params, options);
 
       expect(parseInt(result.count)).to.be.equal(dummyData.length);
       expect(result.data.length).to.be.greaterThan(1);
@@ -88,7 +88,7 @@ describe('Product DAO unit test', () => {
       let checkContinue = true;
 
       while (checkContinue) {
-        const result = await productDAO.getProducts(params, options);
+        const result = await productService.getProducts(params, options);
         options.page++;
 
         if (result.data.length != 0) {
@@ -102,7 +102,7 @@ describe('Product DAO unit test', () => {
 
     it('should search by name', async () => {
       params.name = "poplin";
-      const result = await productDAO.getProducts(params, options);
+      const result = await productService.getProducts(params, options);
 
       expect(result.count).to.be.greaterThan(0);
       expect(result.data.length).to.be.greaterThan(0);
@@ -119,19 +119,19 @@ describe('Product DAO unit test', () => {
           size: ["L", "M"],
           color: ["black", "red"],
           description: "Test description",
-          availability: ["Available"],
+          availability: "Available",
           price: [{ amount: 1000, currency: config.product.DEFAULT_CURRENCY }],
           image: ["test_img.png"]
         }
 
-        const result = await productDAO.createProduct(data);
+        const result = await productService.createProduct(data);
 
         const params = { "name": "Test new Product" };
         const options = {
           page: 0,
           limit: 5
         };
-        const searchNew = await productDAO.getProducts(params, options);
+        const searchNew = await productService.getProducts(params, options);
 
         expect(result).to.be.an('object');
         expect(result).to.have.property('name');
@@ -157,12 +157,12 @@ describe('Product DAO unit test', () => {
         color: ["white"]
       }
 
-      const searchProduct = await productDAO.getProducts({ "name": "Test new Product" }, { page: 0, limit: 1 });
+      const searchProduct = await productService.getProducts({ "name": "Test new Product" }, { page: 0, limit: 1 });
       const updateProductId = searchProduct.data[0].id;
 
-      const updatedProduct = await productDAO.updateProduct(updateProductId, dataUpdate);
+      const updatedProduct = await productService.updateProduct(updateProductId, dataUpdate);
 
-      const newSearchProduct = await productDAO.getProducts({ "name": "Test new Product" }, { page: 0, limit: 1 });
+      const newSearchProduct = await productService.getProducts({ "name": "Test new Product" }, { page: 0, limit: 1 });
 
       expect(updatedProduct).to.be.an('object');
       expect(updatedProduct.id).to.be.equal(newSearchProduct.data[0].id);
@@ -175,12 +175,12 @@ describe('Product DAO unit test', () => {
   describe('deleteProduct', () => {
     it('should delete a product', async () => {
 
-      const searchProduct = await productDAO.getProducts({ "name": "Test new Product" }, { page: 0, limit: 1 });
+      const searchProduct = await productService.getProducts({ "name": "Test new Product" }, { page: 0, limit: 1 });
       const productId = searchProduct.data[0].id;
 
-      const isDeleted = await productDAO.deleteProduct(productId);
+      const isDeleted = await productService.deleteProduct(productId);
       
-      const secondDelete = await productDAO.deleteProduct(productId);
+      const secondDelete = await productService.deleteProduct(productId);
 
       expect(isDeleted).to.be.equal(true);
       expect(secondDelete).to.be.equal(false);
